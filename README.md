@@ -84,7 +84,12 @@ git add -A && git commit -m "post(my-slug): 标题" && git push origin main
 - `tags` 只聚合文章（不含 pages），slug 规则：小写、空格转 `-`、保留中文；
 - 构建期**不依赖**本文件；它用于校验与人工查阅。
 
-## 7. 提交约定
+## 7. 两条硬约定（不要违反）
+
+1. **`pages/` 的 `tags` 只作角标，不参与站点 tag 聚合。** 取 `tags[0]` 渲染页面角标即可；线上 `/tags/about/`、`/tags/stack/`、`/tags/status/` 均为 404，构建器若给页面也建 term 页，URL 集合会从 80 变成 83，parity 门禁会红。`meta.json` 的 `tags` 也只由 `posts/` 聚合。
+2. **`date` / `updated` 必须带 `+08:00` 偏移，不要写 UTC（`Z`）。** 写成字符串并加引号：`date: "2026-10-17T15:00:00+08:00"`。YAML 若把它解析成 `Date` 再 `toISOString()` 会变成 UTC，全站日期整体偏移 8 小时。
+
+## 8. 提交约定
 
 - `post(<slug>): 标题` / `page(<slug>): 标题` / `chore(meta): ...` / `fix(<slug>): ...`
 - 一个 commit 只做一件事；不要在同一 commit 里混入格式化全仓库。
