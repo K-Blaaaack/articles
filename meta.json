@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "generated_at": "2026-10-26T18:17:14.904Z",
-  "commit": "d12c2dc2379ebb65503566209c2b3db05040a15a",
+  "generated_at": "2026-10-26T18:25:51.128Z",
+  "commit": "28c47d3e82e71d4f3e7fb4cc80a251791c212e16",
   "site": {
     "title": "K-BLACK",
     "base": "https://k-black.top/",
@@ -332,9 +332,9 @@
       "summary": "test",
       "url": "/posts/test/",
       "reading_minutes": 1,
-      "words": 1,
+      "words": 2,
       "cover": null,
-      "hash": "a701ed838e84c49f"
+      "hash": "d66b9a0dd59dd300"
     },
     {
       "slug": "more-links",
