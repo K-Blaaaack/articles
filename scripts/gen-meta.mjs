@@ -3,6 +3,7 @@
 // 契约来源：my-homepage/docs/architecture/40-implementation-contract.md §2 / §3.3
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 
 const ROOT = process.cwd();
 const OUT = path.join(ROOT, 'meta.json');
@@ -138,8 +139,12 @@ for (const file of listFiles(path.join(ROOT, 'posts'))) {
   const slug = path.basename(path.dirname(file));
   let fm;
   let body;
+  let hash;
   try {
-    const parsed = parseFrontMatter(fs.readFileSync(file, 'utf8'));
+    // 内容指纹：对文件原始字节做 sha256，不 trim、不做任何规范化
+    const buf = fs.readFileSync(file);
+    hash = crypto.createHash('sha256').update(buf).digest('hex').slice(0, 16);
+    const parsed = parseFrontMatter(buf.toString('utf8'));
     fm = parsed.data;
     body = parsed.body;
   } catch (e) { errors.push(rel + ': ' + e.message); continue; }
@@ -162,6 +167,7 @@ for (const file of listFiles(path.join(ROOT, 'posts'))) {
     reading_minutes: readingMinutes(words),
     words,
     cover: fm.cover ? String(fm.cover) : null,
+    hash,
   });
 }
 
@@ -201,6 +207,7 @@ const tags = [...tagMap.values()].sort((a, b) => b.count - a.count || a.slug.loc
 const meta = {
   version: 1,
   generated_at: new Date().toISOString(),
+  commit: process.env.GITHUB_SHA || null,
   site: SITE,
   counts: { articles: articles.length, tags: tags.length, pages: pages.length },
   articles,

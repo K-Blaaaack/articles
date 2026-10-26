@@ -82,6 +82,8 @@ git add -A && git commit -m "post(my-slug): 标题" && git push origin main
 - 只含 `draft: false` 的文章，按 `date` 倒序；
 - `words` 按 CJK 字数 + 拉丁词数统计，`reading_minutes = round(words / 400)`；
 - `tags` 只聚合文章（不含 pages），slug 规则：小写、空格转 `-`、保留中文；
+- 每篇文章带 `hash`：`sha256(index.md 原始字节)[:16]`，**不 trim、不规范化**；正文或 front matter 任一字节变化都会变。运行时靠它判断「这篇改没改」，只看篇数/最新 slug 会漏掉老文章的修改。
+- 顶层 `commit`：CI 里取 `GITHUB_SHA`，本地跑为 `null`。
 - 构建期**不依赖**本文件；它用于校验与人工查阅。
 
 ## 7. 两条硬约定（不要违反）

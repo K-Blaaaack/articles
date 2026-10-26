@@ -38,9 +38,10 @@ jobs:
         run: |
           node -e "
             const m = require('./meta.json');
-            const need = ['version','generated_at','site','counts','articles','pages','tags'];
+            const need = ['version','generated_at','commit','site','counts','articles','pages','tags'];
             for (const k of need) if (!(k in m)) throw new Error('meta.json missing ' + k);
             if (m.articles.some(a => !a.slug || !a.date || !a.url)) throw new Error('bad article entry');
+            if (m.articles.some(a => typeof a.hash !== 'string' || !/^[0-9a-f]{16}$/.test(a.hash))) throw new Error('bad article hash (need sha256 hex[:16])');
             if (m.counts.articles !== m.articles.length) throw new Error('counts.articles mismatch');
             if (m.counts.tags !== m.tags.length) throw new Error('counts.tags mismatch');
             if (m.counts.pages !== m.pages.length) throw new Error('counts.pages mismatch');

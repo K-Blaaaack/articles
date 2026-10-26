@@ -1,6 +1,7 @@
 {
   "version": 1,
-  "generated_at": "2026-10-26T18:08:44.608Z",
+  "generated_at": "2026-10-26T18:16:55.444Z",
+  "commit": null,
   "site": {
     "title": "K-BLACK",
     "base": "https://k-black.top/",
@@ -32,7 +33,8 @@
       "url": "/posts/hyps-hub/",
       "reading_minutes": 8,
       "words": 3263,
-      "cover": null
+      "cover": null,
+      "hash": "3e2ab2657079b6e4"
     },
     {
       "slug": "ai-dev-brief",
@@ -52,7 +54,8 @@
       "url": "/posts/ai-dev-brief/",
       "reading_minutes": 6,
       "words": 2388,
-      "cover": null
+      "cover": null,
+      "hash": "d419130ad9de7343"
     },
     {
       "slug": "kernel-autobuild-pipeline",
@@ -74,7 +77,8 @@
       "url": "/posts/kernel-autobuild-pipeline/",
       "reading_minutes": 8,
       "words": 3107,
-      "cover": null
+      "cover": null,
+      "hash": "0fd2d23c874f8859"
     },
     {
       "slug": "t480-custom-kernel",
@@ -97,7 +101,8 @@
       "url": "/posts/t480-custom-kernel/",
       "reading_minutes": 4,
       "words": 1725,
-      "cover": null
+      "cover": null,
+      "hash": "ba1011fa5d8c1526"
     },
     {
       "slug": "custom-cachyos-kernel",
@@ -119,7 +124,8 @@
       "url": "/posts/custom-cachyos-kernel/",
       "reading_minutes": 6,
       "words": 2425,
-      "cover": null
+      "cover": null,
+      "hash": "25902b724fe42e2a"
     },
     {
       "slug": "homevpn",
@@ -142,7 +148,8 @@
       "url": "/posts/homevpn/",
       "reading_minutes": 6,
       "words": 2269,
-      "cover": null
+      "cover": null,
+      "hash": "2369aa61abdd84ef"
     },
     {
       "slug": "open-road-scope",
@@ -165,7 +172,8 @@
       "url": "/posts/open-road-scope/",
       "reading_minutes": 5,
       "words": 1896,
-      "cover": null
+      "cover": null,
+      "hash": "492150477791b497"
     },
     {
       "slug": "poweredge-r730-fanctl",
@@ -188,7 +196,8 @@
       "url": "/posts/poweredge-r730-fanctl/",
       "reading_minutes": 3,
       "words": 1206,
-      "cover": null
+      "cover": null,
+      "hash": "832f8118b2bf63a2"
     },
     {
       "slug": "pkg10-kernel-port",
@@ -209,7 +218,8 @@
       "url": "/posts/pkg10-kernel-port/",
       "reading_minutes": 2,
       "words": 872,
-      "cover": null
+      "cover": null,
+      "hash": "00dbb40508af140b"
     },
     {
       "slug": "ba-account-recovery",
@@ -227,7 +237,8 @@
       "url": "/posts/ba-account-recovery/",
       "reading_minutes": 3,
       "words": 1073,
-      "cover": null
+      "cover": null,
+      "hash": "a137af9973751c68"
     },
     {
       "slug": "arch-linux-software-management",
@@ -246,7 +257,8 @@
       "url": "/posts/arch-linux-software-management/",
       "reading_minutes": 1,
       "words": 348,
-      "cover": null
+      "cover": null,
+      "hash": "5e64779c0d8f31ec"
     },
     {
       "slug": "arch-linux-setup",
@@ -264,7 +276,8 @@
       "url": "/posts/arch-linux-setup/",
       "reading_minutes": 1,
       "words": 47,
-      "cover": null
+      "cover": null,
+      "hash": "bc040852504250dd"
     },
     {
       "slug": "esp32-getting-started",
@@ -283,7 +296,8 @@
       "url": "/posts/esp32-getting-started/",
       "reading_minutes": 1,
       "words": 55,
-      "cover": null
+      "cover": null,
+      "hash": "6cf603d208218949"
     },
     {
       "slug": "migration-to-hugo",
@@ -301,7 +315,8 @@
       "url": "/posts/migration-to-hugo/",
       "reading_minutes": 1,
       "words": 73,
-      "cover": null
+      "cover": null,
+      "hash": "45a85569d85471cd"
     },
     {
       "slug": "test",
@@ -318,7 +333,8 @@
       "url": "/posts/test/",
       "reading_minutes": 1,
       "words": 1,
-      "cover": null
+      "cover": null,
+      "hash": "a701ed838e84c49f"
     },
     {
       "slug": "more-links",
@@ -336,7 +352,8 @@
       "url": "/posts/more-links/",
       "reading_minutes": 1,
       "words": 57,
-      "cover": null
+      "cover": null,
+      "hash": "9d1e1b15fe786849"
     }
   ],
   "pages": [
