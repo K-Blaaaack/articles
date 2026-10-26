@@ -1,0 +1,708 @@
+{
+  "version": 1,
+  "generated_at": "2026-10-26T16:41:39.765Z",
+  "site": {
+    "title": "K-BLACK",
+    "base": "https://k-black.top/",
+    "description": "K-Black 个人主页"
+  },
+  "counts": {
+    "articles": 16,
+    "tags": 57,
+    "pages": 4
+  },
+  "articles": [
+    {
+      "slug": "hyps-hub",
+      "title": "Hyps Hub：给 Hyps CLI 套一层 GUI，但不碰它的工作区",
+      "date": "2026-10-17T15:00:00+08:00",
+      "updated": null,
+      "tags": [
+        "Linux",
+        "Qt",
+        "QML",
+        "Arch",
+        "Hyps",
+        "游戏启动器"
+      ],
+      "categories": [
+        "技术笔记"
+      ],
+      "summary": "Hyps 是一个 Bash 脚本集合。做 GUI 最大的风险，是把上游的配置、组件和 Git 工作区搅乱。这篇文章讲 Hyps Hub 怎么做隔离与适配，独立克隆组件、注入四个目录变量、所有调用走参数数组、更新只做 ff-only，以及为什么「不实现」也是一种交付。",
+      "url": "/posts/hyps-hub/",
+      "reading_minutes": 8,
+      "words": 3263,
+      "cover": null
+    },
+    {
+      "slug": "ai-dev-brief",
+      "title": "任务书定边界，人做验收：98 分钟让 AI 搓出一个桌面客户端",
+      "date": "2026-10-17T14:55:00+08:00",
+      "updated": null,
+      "tags": [
+        "AI",
+        "开发流程",
+        "协作",
+        "复盘"
+      ],
+      "categories": [
+        "技术笔记"
+      ],
+      "summary": "一次 98 分钟的桌面客户端开发记录。8,653 字任务书定死边界，之后 22 条共 454 字的短句做验收。22 条里 16 条在抠界面和文案，没有一条改架构，返工全发生在像素层面。这篇拆任务书里真正起作用的九条约束，以及哪些事任务书管不到。",
+      "url": "/posts/ai-dev-brief/",
+      "reading_minutes": 6,
+      "words": 2388,
+      "cover": null
+    },
+    {
+      "slug": "kernel-autobuild-pipeline",
+      "title": "内核自动构建流水线：从计划任务到自动发布",
+      "date": "2026-10-09T02:00:00+08:00",
+      "updated": null,
+      "tags": [
+        "内核",
+        "自动化",
+        "CachyOS",
+        "Docker",
+        "Shell",
+        "CI"
+      ],
+      "categories": [
+        "技术笔记"
+      ],
+      "summary": "把「每次人工同步源码 + 编译内核」变成「定时任务自动跑」：1Panel 计划任务触发 → 检查上游版本 → 下载验签 → 重放式合并 PKGBUILD → 容器内编译 → 产物校验 → 推配方到 GitHub 并发 Release → 微信通知。全链路逐脚本拆解。",
+      "url": "/posts/kernel-autobuild-pipeline/",
+      "reading_minutes": 8,
+      "words": 3107,
+      "cover": null
+    },
+    {
+      "slug": "t480-custom-kernel",
+      "title": "ThinkPad T480 定制精简内核：按用途裁剪与一次 NAT 误裁修正",
+      "date": "2026-09-27T10:00:00+08:00",
+      "updated": null,
+      "tags": [
+        "内核",
+        "CachyOS",
+        "ThinkPad",
+        "T480",
+        "NAT",
+        "精简内核",
+        "编译"
+      ],
+      "categories": [
+        "技术笔记"
+      ],
+      "summary": "ThinkPad T480 的定制精简内核：按 T480 实际用途裁剪（非官方通用内核），本次换用 CachyOS 官方配方重编，并修正了早期精简时误裁 NAT 模块导致透明代理不可用的问题。附 docker -it 卡死大坑。",
+      "url": "/posts/t480-custom-kernel/",
+      "reading_minutes": 4,
+      "words": 1725,
+      "cover": null
+    },
+    {
+      "slug": "custom-cachyos-kernel",
+      "title": "自编译 CachyOS 内核：BORE + ThinLTO + x86-64-v3 + 关闭 Intel 无线 LAR",
+      "date": "2026-09-26T15:00:00+08:00",
+      "updated": null,
+      "tags": [
+        "内核",
+        "CachyOS",
+        "Arch Linux",
+        "BORE",
+        "ThinLTO",
+        "编译"
+      ],
+      "categories": [
+        "技术笔记"
+      ],
+      "summary": "基于 CachyOS 官方内核源码自编译专属内核：BORE + Clang ThinLTO + x86-64-v3 + 关闭 Intel 无线 LAR。附定制清单、实现方式、构建流程、踩坑记录与部署回退方案。",
+      "url": "/posts/custom-cachyos-kernel/",
+      "reading_minutes": 6,
+      "words": 2425,
+      "cover": null
+    },
+    {
+      "slug": "homevpn",
+      "title": "homevpn：异地组网 + 三地出口切换",
+      "date": "2026-09-23T20:00:00+08:00",
+      "updated": null,
+      "tags": [
+        "VPN",
+        "OpenVPN",
+        "Shadowsocks",
+        "组网",
+        "透明代理",
+        "iptables",
+        "脚本"
+      ],
+      "categories": [
+        "技术笔记"
+      ],
+      "summary": "用一台广州云服务器做 OpenVPN 枢纽，把家里的机器、本地主力机和随行的 ThinkPad 组进同一张网，并用一个 bash 脚本实现 local / home / gzhou 三地出口一键切换。",
+      "url": "/posts/homevpn/",
+      "reading_minutes": 6,
+      "words": 2269,
+      "cover": null
+    },
+    {
+      "slug": "open-road-scope",
+      "title": "OpenRoadScope — 开源的跨平台行车数据可视化软件",
+      "date": "2026-08-20T03:20:00+08:00",
+      "updated": null,
+      "tags": [
+        "OBD",
+        "ELM327",
+        "Electron",
+        "Vue",
+        "Python",
+        "开源项目",
+        "车载诊断"
+      ],
+      "categories": [
+        "技术笔记"
+      ],
+      "summary": "OpenRoadScope 是一个基于 OBD-II（ELM327）的开源跨平台行车数据可视化软件：Python sidecar 采集、Electron 主进程托管、Vue 3 自定义仪表盘，支持故障诊断、中英文、深浅主题与多平台发行。",
+      "url": "/posts/open-road-scope/",
+      "reading_minutes": 5,
+      "words": 1896,
+      "cover": null
+    },
+    {
+      "slug": "poweredge-r730-fanctl",
+      "title": "Dell PowerEdge R730 风扇手动控制脚本 — 原理与使用",
+      "date": "2026-08-14T12:00:00+08:00",
+      "updated": null,
+      "tags": [
+        "PowerEdge",
+        "R730",
+        "IPMI",
+        "iDRAC",
+        "ipmitool",
+        "风扇",
+        "脚本"
+      ],
+      "categories": [
+        "技术笔记"
+      ],
+      "summary": "基于 ipmitool/IPMI raw 命令的 R730 风扇手动控制脚本，支持百分比调速、中英双语、Ctrl+C 自动恢复，附完整源码与下载。",
+      "url": "/posts/poweredge-r730-fanctl/",
+      "reading_minutes": 3,
+      "words": 1206,
+      "cover": null
+    },
+    {
+      "slug": "pkg10-kernel-port",
+      "title": "PKG10 (OnePlus Ace 5) 主线内核移植 — 笔记",
+      "date": "2026-08-05T04:00:00+08:00",
+      "updated": null,
+      "tags": [
+        "内核",
+        "移植",
+        "OnePlus",
+        "Kernel",
+        "Linux"
+      ],
+      "categories": [
+        "技术笔记"
+      ],
+      "summary": "OnePlus Ace 5 (PKG110) 主线内核移植笔记：目标启动 → 屏幕 → 触控。每日持续更新。",
+      "url": "/posts/pkg10-kernel-port/",
+      "reading_minutes": 2,
+      "words": 872,
+      "cover": null
+    },
+    {
+      "slug": "ba-account-recovery",
+      "title": "BA日服账号申诉模板",
+      "date": "2026-07-20T16:00:00+08:00",
+      "updated": null,
+      "tags": [
+        "蔚蓝档案",
+        "账号"
+      ],
+      "categories": [
+        "技术笔记"
+      ],
+      "summary": "蔚蓝档案日服账号丢失后的申诉流程与日文邮件模板。",
+      "url": "/posts/ba-account-recovery/",
+      "reading_minutes": 3,
+      "words": 1073,
+      "cover": null
+    },
+    {
+      "slug": "arch-linux-software-management",
+      "title": "Arch Linux 软件生态与拓展解决方案",
+      "date": "2026-07-20T15:00:00+08:00",
+      "updated": null,
+      "tags": [
+        "Linux",
+        "Arch",
+        "软件管理"
+      ],
+      "categories": [
+        "技术笔记"
+      ],
+      "summary": "Arch Linux 下通过 AUR、Chaotic-AUR、Flatpak、debtap 和 distrobox 实现拓展软件生态的方法。",
+      "url": "/posts/arch-linux-software-management/",
+      "reading_minutes": 1,
+      "words": 348,
+      "cover": null
+    },
+    {
+      "slug": "arch-linux-setup",
+      "title": "Arch Linux 安装记录",
+      "date": "2026-01-10T09:00:00+08:00",
+      "updated": null,
+      "tags": [
+        "Linux",
+        "Arch"
+      ],
+      "categories": [
+        "技术笔记"
+      ],
+      "summary": "Arch Linux 安装过程的简要记录。",
+      "url": "/posts/arch-linux-setup/",
+      "reading_minutes": 1,
+      "words": 47,
+      "cover": null
+    },
+    {
+      "slug": "esp32-getting-started",
+      "title": "ESP32 入门笔记",
+      "date": "2025-12-15T14:30:00+08:00",
+      "updated": null,
+      "tags": [
+        "ESP32",
+        "单片机",
+        "开发"
+      ],
+      "categories": [
+        "技术笔记"
+      ],
+      "summary": "记录 ESP32 开发板的入门使用经验。",
+      "url": "/posts/esp32-getting-started/",
+      "reading_minutes": 1,
+      "words": 55,
+      "cover": null
+    },
+    {
+      "slug": "migration-to-hugo",
+      "title": "本站迁移至 Hugo",
+      "date": "2025-11-29T10:11:45+08:00",
+      "updated": null,
+      "tags": [
+        "站点",
+        "Hugo"
+      ],
+      "categories": [
+        "站点公告"
+      ],
+      "summary": "本站已从纯静态 HTML 迁移至 Hugo 静态站点生成器。",
+      "url": "/posts/migration-to-hugo/",
+      "reading_minutes": 1,
+      "words": 73,
+      "cover": null
+    },
+    {
+      "slug": "test",
+      "title": "test",
+      "date": "2025-11-29T10:11:45+08:00",
+      "updated": null,
+      "tags": [
+        "test"
+      ],
+      "categories": [
+        "tyest"
+      ],
+      "summary": "test",
+      "url": "/posts/test/",
+      "reading_minutes": 1,
+      "words": 4,
+      "cover": null
+    },
+    {
+      "slug": "more-links",
+      "title": "更多链接",
+      "date": "2025-11-29T10:00:00+08:00",
+      "updated": null,
+      "tags": [
+        "链接",
+        "站点"
+      ],
+      "categories": [
+        "站点公告"
+      ],
+      "summary": "本站相关链接与推荐网站汇总。",
+      "url": "/posts/more-links/",
+      "reading_minutes": 1,
+      "words": 57,
+      "cover": null
+    }
+  ],
+  "pages": [
+    {
+      "slug": "测试",
+      "title": "测试",
+      "url": "/测试/"
+    },
+    {
+      "slug": "info",
+      "title": "关于本站",
+      "url": "/info/"
+    },
+    {
+      "slug": "stack",
+      "title": "技术栈",
+      "url": "/stack/"
+    },
+    {
+      "slug": "wip",
+      "title": "页面开发中",
+      "url": "/wip/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "内核",
+      "slug": "内核",
+      "count": 4,
+      "url": "/tags/内核/"
+    },
+    {
+      "name": "Linux",
+      "slug": "linux",
+      "count": 4,
+      "url": "/tags/linux/"
+    },
+    {
+      "name": "Arch",
+      "slug": "arch",
+      "count": 3,
+      "url": "/tags/arch/"
+    },
+    {
+      "name": "CachyOS",
+      "slug": "cachyos",
+      "count": 3,
+      "url": "/tags/cachyos/"
+    },
+    {
+      "name": "编译",
+      "slug": "编译",
+      "count": 2,
+      "url": "/tags/编译/"
+    },
+    {
+      "name": "脚本",
+      "slug": "脚本",
+      "count": 2,
+      "url": "/tags/脚本/"
+    },
+    {
+      "name": "站点",
+      "slug": "站点",
+      "count": 2,
+      "url": "/tags/站点/"
+    },
+    {
+      "name": "车载诊断",
+      "slug": "车载诊断",
+      "count": 1,
+      "url": "/tags/车载诊断/"
+    },
+    {
+      "name": "单片机",
+      "slug": "单片机",
+      "count": 1,
+      "url": "/tags/单片机/"
+    },
+    {
+      "name": "风扇",
+      "slug": "风扇",
+      "count": 1,
+      "url": "/tags/风扇/"
+    },
+    {
+      "name": "复盘",
+      "slug": "复盘",
+      "count": 1,
+      "url": "/tags/复盘/"
+    },
+    {
+      "name": "精简内核",
+      "slug": "精简内核",
+      "count": 1,
+      "url": "/tags/精简内核/"
+    },
+    {
+      "name": "开发",
+      "slug": "开发",
+      "count": 1,
+      "url": "/tags/开发/"
+    },
+    {
+      "name": "开发流程",
+      "slug": "开发流程",
+      "count": 1,
+      "url": "/tags/开发流程/"
+    },
+    {
+      "name": "开源项目",
+      "slug": "开源项目",
+      "count": 1,
+      "url": "/tags/开源项目/"
+    },
+    {
+      "name": "链接",
+      "slug": "链接",
+      "count": 1,
+      "url": "/tags/链接/"
+    },
+    {
+      "name": "软件管理",
+      "slug": "软件管理",
+      "count": 1,
+      "url": "/tags/软件管理/"
+    },
+    {
+      "name": "透明代理",
+      "slug": "透明代理",
+      "count": 1,
+      "url": "/tags/透明代理/"
+    },
+    {
+      "name": "蔚蓝档案",
+      "slug": "蔚蓝档案",
+      "count": 1,
+      "url": "/tags/蔚蓝档案/"
+    },
+    {
+      "name": "协作",
+      "slug": "协作",
+      "count": 1,
+      "url": "/tags/协作/"
+    },
+    {
+      "name": "移植",
+      "slug": "移植",
+      "count": 1,
+      "url": "/tags/移植/"
+    },
+    {
+      "name": "游戏启动器",
+      "slug": "游戏启动器",
+      "count": 1,
+      "url": "/tags/游戏启动器/"
+    },
+    {
+      "name": "账号",
+      "slug": "账号",
+      "count": 1,
+      "url": "/tags/账号/"
+    },
+    {
+      "name": "自动化",
+      "slug": "自动化",
+      "count": 1,
+      "url": "/tags/自动化/"
+    },
+    {
+      "name": "组网",
+      "slug": "组网",
+      "count": 1,
+      "url": "/tags/组网/"
+    },
+    {
+      "name": "AI",
+      "slug": "ai",
+      "count": 1,
+      "url": "/tags/ai/"
+    },
+    {
+      "name": "Arch Linux",
+      "slug": "arch-linux",
+      "count": 1,
+      "url": "/tags/arch-linux/"
+    },
+    {
+      "name": "BORE",
+      "slug": "bore",
+      "count": 1,
+      "url": "/tags/bore/"
+    },
+    {
+      "name": "CI",
+      "slug": "ci",
+      "count": 1,
+      "url": "/tags/ci/"
+    },
+    {
+      "name": "Docker",
+      "slug": "docker",
+      "count": 1,
+      "url": "/tags/docker/"
+    },
+    {
+      "name": "Electron",
+      "slug": "electron",
+      "count": 1,
+      "url": "/tags/electron/"
+    },
+    {
+      "name": "ELM327",
+      "slug": "elm327",
+      "count": 1,
+      "url": "/tags/elm327/"
+    },
+    {
+      "name": "ESP32",
+      "slug": "esp32",
+      "count": 1,
+      "url": "/tags/esp32/"
+    },
+    {
+      "name": "Hugo",
+      "slug": "hugo",
+      "count": 1,
+      "url": "/tags/hugo/"
+    },
+    {
+      "name": "Hyps",
+      "slug": "hyps",
+      "count": 1,
+      "url": "/tags/hyps/"
+    },
+    {
+      "name": "iDRAC",
+      "slug": "idrac",
+      "count": 1,
+      "url": "/tags/idrac/"
+    },
+    {
+      "name": "IPMI",
+      "slug": "ipmi",
+      "count": 1,
+      "url": "/tags/ipmi/"
+    },
+    {
+      "name": "ipmitool",
+      "slug": "ipmitool",
+      "count": 1,
+      "url": "/tags/ipmitool/"
+    },
+    {
+      "name": "iptables",
+      "slug": "iptables",
+      "count": 1,
+      "url": "/tags/iptables/"
+    },
+    {
+      "name": "Kernel",
+      "slug": "kernel",
+      "count": 1,
+      "url": "/tags/kernel/"
+    },
+    {
+      "name": "NAT",
+      "slug": "nat",
+      "count": 1,
+      "url": "/tags/nat/"
+    },
+    {
+      "name": "OBD",
+      "slug": "obd",
+      "count": 1,
+      "url": "/tags/obd/"
+    },
+    {
+      "name": "OnePlus",
+      "slug": "oneplus",
+      "count": 1,
+      "url": "/tags/oneplus/"
+    },
+    {
+      "name": "OpenVPN",
+      "slug": "openvpn",
+      "count": 1,
+      "url": "/tags/openvpn/"
+    },
+    {
+      "name": "PowerEdge",
+      "slug": "poweredge",
+      "count": 1,
+      "url": "/tags/poweredge/"
+    },
+    {
+      "name": "Python",
+      "slug": "python",
+      "count": 1,
+      "url": "/tags/python/"
+    },
+    {
+      "name": "QML",
+      "slug": "qml",
+      "count": 1,
+      "url": "/tags/qml/"
+    },
+    {
+      "name": "Qt",
+      "slug": "qt",
+      "count": 1,
+      "url": "/tags/qt/"
+    },
+    {
+      "name": "R730",
+      "slug": "r730",
+      "count": 1,
+      "url": "/tags/r730/"
+    },
+    {
+      "name": "Shadowsocks",
+      "slug": "shadowsocks",
+      "count": 1,
+      "url": "/tags/shadowsocks/"
+    },
+    {
+      "name": "Shell",
+      "slug": "shell",
+      "count": 1,
+      "url": "/tags/shell/"
+    },
+    {
+      "name": "T480",
+      "slug": "t480",
+      "count": 1,
+      "url": "/tags/t480/"
+    },
+    {
+      "name": "test",
+      "slug": "test",
+      "count": 1,
+      "url": "/tags/test/"
+    },
+    {
+      "name": "ThinkPad",
+      "slug": "thinkpad",
+      "count": 1,
+      "url": "/tags/thinkpad/"
+    },
+    {
+      "name": "ThinLTO",
+      "slug": "thinlto",
+      "count": 1,
+      "url": "/tags/thinlto/"
+    },
+    {
+      "name": "VPN",
+      "slug": "vpn",
+      "count": 1,
+      "url": "/tags/vpn/"
+    },
+    {
+      "name": "Vue",
+      "slug": "vue",
+      "count": 1,
+      "url": "/tags/vue/"
+    }
+  ]
+}

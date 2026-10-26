@@ -1,0 +1,60 @@
+name: meta
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'posts/**'
+      - 'pages/**'
+      - 'scripts/gen-meta.mjs'
+      - '.github/workflows/meta.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: meta-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  meta:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Regenerate meta.json
+        run: node scripts/gen-meta.mjs
+
+      - name: Validate meta.json
+        run: |
+          node -e "
+            const m = require('./meta.json');
+            const need = ['version','generated_at','site','counts','articles','pages','tags'];
+            for (const k of need) if (!(k in m)) throw new Error('meta.json missing ' + k);
+            if (m.articles.some(a => !a.slug || !a.date || !a.url)) throw new Error('bad article entry');
+            if (m.counts.articles !== m.articles.length) throw new Error('counts.articles mismatch');
+            if (m.counts.tags !== m.tags.length) throw new Error('counts.tags mismatch');
+            if (m.counts.pages !== m.pages.length) throw new Error('counts.pages mismatch');
+            console.log('meta.json ok:', m.counts);
+          "
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- meta.json; then
+            echo 'meta.json unchanged'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add meta.json
+          git commit -m 'chore(meta): regenerate meta.json [skip ci]'
+          git push origin HEAD:main
