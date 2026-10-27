@@ -62,7 +62,9 @@ cover: "cover.webp"          # 可选，相对路径
 
 ```bash
 # 1. 新建（自动生成 front matter，date 自动带 +08:00）
-node scripts/new-post.mjs "文章标题" --tags "Linux,Qt" --summary "一句话摘要"
+node scripts/new-post.mjs                       # 交互式：逐项问标题 / slug / 标签 / 分类 / 摘要
+node scripts/new-post.mjs "文章标题"             # 只给标题，缺的字段会在终端里追问
+node scripts/new-post.mjs "文章标题" --tags "Linux,Qt" --summary "一句话摘要"   # 全参数，不追问
 
 # 2. 写正文（图片放同目录，正文用相对路径）
 $EDITOR posts/<slug>/index.md

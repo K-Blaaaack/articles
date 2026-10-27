@@ -3,16 +3,18 @@
  * new-post.mjs —— 新建文章/页面骨架（零依赖，Node ≥ 18）
  *
  * 用法：
- *   node scripts/new-post.mjs "文章标题"
- *   node scripts/new-post.mjs "文章标题" --slug my-slug --tags "Linux,Qt" --summary "一句话摘要"
- *   node scripts/new-post.mjs "关于" --page            # 建到 pages/
- *   node scripts/new-post.mjs --help
+ *   node scripts/new-post.mjs                          # 交互式：逐项问标题/slug/标签/分类/摘要
+ *   node scripts/new-post.mjs "文章标题"                # 只给标题：其余缺失项会追问（终端下）
+ *   node scripts/new-post.mjs "文章标题" --tags "Linux,Qt" --summary "一句话"
+ *   node scripts/new-post.mjs "关于" --page
  *
  * 只生成文件，不提交、不推送、不改 meta.json（Actions 会在 push 后重算）。
  */
 import { mkdirSync, writeFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createInterface } from 'node:readline/promises';
+import { stdin, stdout } from 'node:process';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -21,19 +23,24 @@ const HELP = `
 
   node scripts/new-post.mjs "标题" [选项]
 
+不带参数直接运行 = 交互式问答；只给标题时，缺的字段会追问（终端下）。
+
 选项
   --slug <slug>        指定 slug（默认由标题推导；中文标题推不出来时用日期兜底）
   --tags "a,b"         tags 数组，逗号分隔（文章默认 []，页面默认 ["PAGE"]）
   --categories "a,b"   categories 数组，逗号分隔（文章默认 ["技术笔记"]）
-  --summary "…"        摘要（不写就不生成该字段）
+  --summary "…"        摘要（不写会在终端里追问；非交互环境留空）
   --date <ISO>         date，默认当前时间（+08:00）
   --cover <file>       cover 相对路径
   --draft              标记 draft: true（不进 meta.json、不上线）
   --page               建到 pages/ 而不是 posts/（页面）
+  --ask                强制交互（即使字段都给了也问一遍）
+  --no-ask             强制不交互，缺失字段用默认值
   --force              目录已存在时仍然写入（覆盖 index.md）
   --help               显示本帮助
 
 示例
+  node scripts/new-post.mjs
   node scripts/new-post.mjs "Hyps Hub 的配置隔离"
   node scripts/new-post.mjs "Arch 下 Wayland 缩放" --tags "Linux,Wayland" --summary "分数缩放的坑"
   node scripts/new-post.mjs "关于本站" --page --slug about
@@ -53,6 +60,8 @@ function parseArgs(argv) {
     else if (a === '--draft') out.draft = true;
     else if (a === '--page') out.page = true;
     else if (a === '--force') out.force = true;
+    else if (a === '--ask') out.ask = true;
+    else if (a === '--no-ask') out.noAsk = true;
     else if (takesValue.has(a)) {
       const v = argv[i + 1];
       if (v === undefined) die(a + ' 需要一个值');
@@ -108,11 +117,75 @@ if (args.help) {
   process.exit(0);
 }
 
-const title = (args._[0] || '').trim();
+const canAsk = stdio => Boolean(stdio);
+const isTTY = Boolean(stdin.isTTY && stdout.isTTY);
+const wantAsk = args.ask || (isTTY && !args.noAsk);
+
+let rl = null;
+let buffered = null;
+
+/** 非 TTY（管道/重定向）时预先读完 stdin，按行回答，避免 question() 永久挂起。 */
+async function loadBuffered() {
+  const chunks = [];
+  for await (const c of stdin) chunks.push(Buffer.from(c));
+  buffered = Buffer.concat(chunks).toString('utf8').split(/\r?\n/);
+}
+
+async function ask(question, fallback) {
+  if (isTTY) {
+    if (!rl) rl = createInterface({ input: stdin, output: stdout });
+    stdout.write(question);
+    const a = (await rl.question('')).trim();
+    return a || fallback;
+  }
+  if (!buffered) await loadBuffered();
+  const a = (buffered.length ? buffered.shift() : '').trim();
+  return a || fallback;
+}
+
+let title = (args._[0] || '').trim();
+
+// ── 交互：没有标题，或字段缺失且允许提问 ──
+if (wantAsk && !title) {
+  console.log('新建文章（直接回车用方括号里的默认值）\n');
+  title = (await ask('标题：', '')).trim();
+}
 if (!title) {
+  if (wantAsk) {
+    if (rl) rl.close();
+  }
   console.error(HELP.trim());
   die('缺少标题');
 }
+
+const isPage = Boolean(args.page);
+
+// slug
+if (wantAsk && !args.slug) {
+  const guess = slugify(title);
+  const tip = guess ? ` [${guess}]` : '';
+  args.slug = await ask('slug' + tip + '：', guess);
+}
+
+// tags
+if (wantAsk && args.tags.length === 0) {
+  const def = isPage ? 'PAGE' : '';
+  const tip = isPage ? ' [PAGE]' : '（留空表示没有标签）';
+  const v = await ask('标签，逗号分隔' + tip + '：', def);
+  args.tags = splitList(v);
+}
+
+// categories（仅文章）
+if (wantAsk && !isPage && args.categories.length === 0) {
+  const v = await ask('分类 [技术笔记]：', '技术笔记');
+  args.categories = splitList(v);
+}
+
+// summary
+if (wantAsk && !args.summary) {
+  args.summary = await ask('摘要（留空则不写该字段）：', '');
+}
+if (rl) rl.close();
 
 const date = args.date || nowISO();
 if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}([+-]\d{2}:\d{2}|Z)$/.test(date)) {
@@ -135,21 +208,17 @@ if (/[\u4e00-\u9fa5]/.test(slug)) {
   console.warn('提醒：slug 含中文，URL 会被百分号编码，分享链接不好看。');
 }
 
-const isPage = Boolean(args.page);
 const dir = join(ROOT, isPage ? 'pages' : 'posts', slug);
 const file = join(dir, 'index.md');
-
 if (existsSync(file) && !args.force) {
   die('已存在：' + file + '（要覆盖加 --force）');
 }
 
 const lines = ['---', 'title: ' + yamlString(title), 'date: ' + yamlString(date)];
 if (isPage) {
-  // 页面：tags 只作角标（如 ABOUT / STACK），不参与 tag 聚合，也没有 draft/categories
   lines.push('tags: ' + yamlList(args.tags.length ? args.tags : ['PAGE']));
   if (args.summary) lines.push('summary: ' + yamlString(args.summary));
 } else {
-  // 文章：固定顺序 title → date → draft → tags → categories → summary → cover
   lines.push('draft: ' + (args.draft ? 'true' : 'false'));
   lines.push('tags: ' + yamlList(args.tags));
   lines.push('categories: ' + yamlList(args.categories.length ? args.categories : ['技术笔记']));
@@ -157,6 +226,7 @@ if (isPage) {
   if (args.cover) lines.push('cover: ' + yamlString(args.cover));
 }
 lines.push('---', '');
+
 if (isPage) lines.push('正文从这里开始。', '');
 else lines.push('正文从这里开始。', '', '## 小标题', '', '- 列表项', '');
 
@@ -164,6 +234,7 @@ mkdirSync(dir, { recursive: true });
 writeFileSync(file, lines.join('\n'), 'utf8');
 
 const rel = (isPage ? 'pages/' : 'posts/') + slug + '/index.md';
+console.log('');
 console.log('已创建 ' + rel);
 console.log('');
 console.log('下一步：');
