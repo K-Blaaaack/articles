@@ -24,7 +24,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2   # purge 步骤要 diff HEAD~1，depth 1 拿不到变更文件
+          fetch-depth: 0   # purge 要 diff push 前后的 commit，需要完整历史
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -63,10 +63,18 @@ jobs:
       # 站点运行时优先读 jsDelivr，所以每次回提 meta.json 后清一次，保证 push 后秒级可见。
       - name: Purge jsDelivr cache (changed files)
         continue-on-error: true
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.event.after }}
         run: |
-          # 通配 purge 实测不生效，必须按具体路径清
-          files=$(git diff --name-only HEAD~1 HEAD -- posts pages meta.json 2>/dev/null || true)
-          if [ -z "$files" ]; then echo 'no changed content files'; fi
+          # 本步骤在 meta 回提之后执行，HEAD 已经是 meta 提交，
+          # 必须用 push 事件的 before..after 区间，不能用 HEAD~1。
+          if [ -n "$BEFORE" ] && [ "$BEFORE" != "0000000000000000000000000000000000000000" ]; then
+            files=$(git diff --name-only "$BEFORE" "$AFTER" -- posts pages 2>/dev/null || true)
+          else
+            files=$(git diff --name-only HEAD~1 HEAD -- posts pages 2>/dev/null || true)
+          fi
+          echo "changed: $files"
           for f in $files; do
             curl -sS --max-time 20 "https://purge.jsdelivr.net/gh/K-Blaaaack/articles@main/$f" >/dev/null || true
             echo "purged $f"
