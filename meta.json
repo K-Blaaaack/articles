@@ -1,18 +1,34 @@
 {
   "version": 1,
-  "generated_at": "2026-10-27T11:07:27.559Z",
-  "commit": "a7514538c3ca23eb66003ea5424cb0ad8a58998e",
+  "generated_at": "2026-10-27T12:04:30.576Z",
+  "commit": null,
   "site": {
     "title": "K-BLACK",
     "base": "https://k-black.top/",
     "description": "K-Black 个人主页"
   },
   "counts": {
-    "articles": 17,
+    "articles": 18,
     "tags": 62,
     "pages": 4
   },
   "articles": [
+    {
+      "slug": "网站架构大改后的第一篇文章",
+      "title": "网站架构大改后的第一篇文章",
+      "date": "2026-10-27T19:29:50+08:00",
+      "updated": null,
+      "tags": [],
+      "categories": [
+        "技术笔记"
+      ],
+      "summary": null,
+      "url": "/posts/网站架构大改后的第一篇文章/",
+      "reading_minutes": 1,
+      "words": 13,
+      "cover": null,
+      "hash": "7a6788a50ebf76c7"
+    },
     {
       "slug": "rebuild-without-hugo",
       "title": "拆掉 Hugo 之后",
@@ -32,9 +48,9 @@
       "summary": "核心动机只有一个：发文章太麻烦。拆掉 Hugo、把内容挪进独立仓库、站点改成运行时拉取，最后变成写 md + push 就完事。中间做错了两版。",
       "url": "/posts/rebuild-without-hugo/",
       "reading_minutes": 2,
-      "words": 903,
+      "words": 950,
       "cover": null,
-      "hash": "110837d4eb3b6960"
+      "hash": "fb1312b409d338ff"
     },
     {
       "slug": "hyps-hub",
