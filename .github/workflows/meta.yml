@@ -24,7 +24,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          fetch-depth: 2   # purge 步骤要 diff HEAD~1，depth 1 拿不到变更文件
 
       - name: Setup Node
         uses: actions/setup-node@v4
