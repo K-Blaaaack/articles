@@ -59,3 +59,11 @@ jobs:
           git add meta.json
           git commit -m 'chore(meta): regenerate meta.json [skip ci]'
           git push origin HEAD:main
+      # jsDelivr 边缘缓存：不主动清会滞后（raw 那边约 5 分钟、jsDelivr 更久）。
+      # 站点运行时优先读 jsDelivr，所以每次回提 meta.json 后清一次，保证 push 后秒级可见。
+      - name: Purge jsDelivr cache
+        continue-on-error: true
+        run: |
+          curl -sS --max-time 30 "https://purge.jsdelivr.net/gh/K-Blaaaack/articles@main/*" || true
+          echo ''
+          echo 'purge requested'
