@@ -23,8 +23,8 @@ const HELP = `
 
 选项
   --slug <slug>        指定 slug（默认由标题推导；中文标题推不出来时用日期兜底）
-  --tags "a,b"         tags 数组，逗号分隔
-  --categories "a,b"   categories 数组，逗号分隔
+  --tags "a,b"         tags 数组，逗号分隔（文章默认 []，页面默认 ["PAGE"]）
+  --categories "a,b"   categories 数组，逗号分隔（文章默认 ["技术笔记"]）
   --summary "…"        摘要（不写就不生成该字段）
   --date <ISO>         date，默认当前时间（+08:00）
   --cover <file>       cover 相对路径
@@ -144,11 +144,18 @@ if (existsSync(file) && !args.force) {
 }
 
 const lines = ['---', 'title: ' + yamlString(title), 'date: ' + yamlString(date)];
-if (args.draft) lines.push('draft: true');
-if (args.tags.length) lines.push('tags: ' + yamlList(args.tags));
-if (args.categories.length) lines.push('categories: ' + yamlList(args.categories));
-if (args.summary) lines.push('summary: ' + yamlString(args.summary));
-if (args.cover) lines.push('cover: ' + yamlString(args.cover));
+if (isPage) {
+  // 页面：tags 只作角标（如 ABOUT / STACK），不参与 tag 聚合，也没有 draft/categories
+  lines.push('tags: ' + yamlList(args.tags.length ? args.tags : ['PAGE']));
+  if (args.summary) lines.push('summary: ' + yamlString(args.summary));
+} else {
+  // 文章：固定顺序 title → date → draft → tags → categories → summary → cover
+  lines.push('draft: ' + (args.draft ? 'true' : 'false'));
+  lines.push('tags: ' + yamlList(args.tags));
+  lines.push('categories: ' + yamlList(args.categories.length ? args.categories : ['技术笔记']));
+  if (args.summary) lines.push('summary: ' + yamlString(args.summary));
+  if (args.cover) lines.push('cover: ' + yamlString(args.cover));
+}
 lines.push('---', '');
 if (isPage) lines.push('正文从这里开始。', '');
 else lines.push('正文从这里开始。', '', '## 小标题', '', '- 列表项', '');

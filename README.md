@@ -79,7 +79,8 @@ git add -A && git commit -m "post(<slug>): 标题" && git push origin main
 | 参数 | 作用 |
 |---|---|
 | `--slug my-slug` | 指定 slug（默认由标题推导；中文标题推不出时用日期兜底并提示） |
-| `--tags "Linux,Qt"` | 生成 `tags: ["Linux", "Qt"]`（数组，不是单值） |
+| `--tags "Linux,Qt"` | 生成 `tags: ["Linux", "Qt"]`（数组，不是单值）；文章默认 `[]`，页面默认 `["PAGE"]` |
+| `--categories "技术笔记"` | 生成 `categories`；文章默认 `["技术笔记"]` |
 | `--summary "…"` | 写入 summary；不传就不生成该字段 |
 | `--date "2026-10-27T12:00:00+08:00"` | 指定发布时间（默认当前时间） |
 | `--draft` | 标记 `draft: true`，不进 meta.json、不上线 |
