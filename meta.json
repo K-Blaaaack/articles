@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "generated_at": "2026-10-27T05:02:17.632Z",
-  "commit": "b1e84d8bb75ba7a50fcf788ecbcebb7dc137448a",
+  "generated_at": "2026-10-27T10:49:23.353Z",
+  "commit": "e91c6a7553dd8aadf49c60b72c5a68b16beebc49",
   "site": {
     "title": "K-BLACK",
     "base": "https://k-black.top/",
@@ -55,9 +55,9 @@
       "summary": "Hyps 是一个 Bash 脚本集合。做 GUI 最大的风险，是把上游的配置、组件和 Git 工作区搅乱。这篇文章讲 Hyps Hub 怎么做隔离与适配，独立克隆组件、注入四个目录变量、所有调用走参数数组、更新只做 ff-only，以及为什么「不实现」也是一种交付。",
       "url": "/posts/hyps-hub/",
       "reading_minutes": 8,
-      "words": 3263,
+      "words": 3266,
       "cover": null,
-      "hash": "3e2ab2657079b6e4"
+      "hash": "6b94aae821769aa8"
     },
     {
       "slug": "ai-dev-brief",
