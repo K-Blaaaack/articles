@@ -1,18 +1,41 @@
 {
   "version": 1,
-  "generated_at": "2026-10-26T18:25:51.128Z",
-  "commit": "28c47d3e82e71d4f3e7fb4cc80a251791c212e16",
+  "generated_at": "2026-10-27T04:46:26.995Z",
+  "commit": null,
   "site": {
     "title": "K-BLACK",
     "base": "https://k-black.top/",
     "description": "K-Black 个人主页"
   },
   "counts": {
-    "articles": 16,
-    "tags": 57,
+    "articles": 17,
+    "tags": 62,
     "pages": 4
   },
   "articles": [
+    {
+      "slug": "rebuild-without-hugo",
+      "title": "拆掉 Hugo 之后",
+      "date": "2026-10-27T12:46:00+08:00",
+      "updated": null,
+      "tags": [
+        "Hugo",
+        "静态站点",
+        "Node",
+        "Cloudflare Pages",
+        "架构",
+        "运行时"
+      ],
+      "categories": [
+        "技术笔记"
+      ],
+      "summary": "核心动机只有一个：发文章太麻烦。拆掉 Hugo、把内容挪进独立仓库、站点改成运行时拉取，最后变成写 md + push 就完事。中间做错了两版。",
+      "url": "/posts/rebuild-without-hugo/",
+      "reading_minutes": 2,
+      "words": 903,
+      "cover": null,
+      "hash": "1c01bda7f9e86279"
+    },
     {
       "slug": "hyps-hub",
       "title": "Hyps Hub：给 Hyps CLI 套一层 GUI，但不碰它的工作区",
@@ -422,6 +445,12 @@
       "url": "/tags/站点/"
     },
     {
+      "name": "Hugo",
+      "slug": "hugo",
+      "count": 2,
+      "url": "/tags/hugo/"
+    },
+    {
       "name": "车载诊断",
       "slug": "车载诊断",
       "count": 1,
@@ -446,10 +475,22 @@
       "url": "/tags/复盘/"
     },
     {
+      "name": "架构",
+      "slug": "架构",
+      "count": 1,
+      "url": "/tags/架构/"
+    },
+    {
       "name": "精简内核",
       "slug": "精简内核",
       "count": 1,
       "url": "/tags/精简内核/"
+    },
+    {
+      "name": "静态站点",
+      "slug": "静态站点",
+      "count": 1,
+      "url": "/tags/静态站点/"
     },
     {
       "name": "开发",
@@ -512,6 +553,12 @@
       "url": "/tags/游戏启动器/"
     },
     {
+      "name": "运行时",
+      "slug": "运行时",
+      "count": 1,
+      "url": "/tags/运行时/"
+    },
+    {
       "name": "账号",
       "slug": "账号",
       "count": 1,
@@ -554,6 +601,12 @@
       "url": "/tags/ci/"
     },
     {
+      "name": "Cloudflare Pages",
+      "slug": "cloudflare-pages",
+      "count": 1,
+      "url": "/tags/cloudflare-pages/"
+    },
+    {
       "name": "Docker",
       "slug": "docker",
       "count": 1,
@@ -576,12 +629,6 @@
       "slug": "esp32",
       "count": 1,
       "url": "/tags/esp32/"
-    },
-    {
-      "name": "Hugo",
-      "slug": "hugo",
-      "count": 1,
-      "url": "/tags/hugo/"
     },
     {
       "name": "Hyps",
@@ -624,6 +671,12 @@
       "slug": "nat",
       "count": 1,
       "url": "/tags/nat/"
+    },
+    {
+      "name": "Node",
+      "slug": "node",
+      "count": 1,
+      "url": "/tags/node/"
     },
     {
       "name": "OBD",
