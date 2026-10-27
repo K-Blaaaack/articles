@@ -1,34 +1,18 @@
 {
   "version": 1,
-  "generated_at": "2026-10-27T12:04:30.576Z",
-  "commit": null,
+  "generated_at": "2026-10-27T12:04:47.679Z",
+  "commit": "de02437e290752ce6a0f9de78a85064d77035b15",
   "site": {
     "title": "K-BLACK",
     "base": "https://k-black.top/",
     "description": "K-Black 个人主页"
   },
   "counts": {
-    "articles": 18,
+    "articles": 17,
     "tags": 62,
     "pages": 4
   },
   "articles": [
-    {
-      "slug": "网站架构大改后的第一篇文章",
-      "title": "网站架构大改后的第一篇文章",
-      "date": "2026-10-27T19:29:50+08:00",
-      "updated": null,
-      "tags": [],
-      "categories": [
-        "技术笔记"
-      ],
-      "summary": null,
-      "url": "/posts/网站架构大改后的第一篇文章/",
-      "reading_minutes": 1,
-      "words": 13,
-      "cover": null,
-      "hash": "7a6788a50ebf76c7"
-    },
     {
       "slug": "rebuild-without-hugo",
       "title": "拆掉 Hugo 之后",
