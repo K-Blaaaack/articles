@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "generated_at": "2026-10-27T12:16:49.256Z",
-  "commit": "18abf4ba53969a18593b76158aff31c1ed6722a9",
+  "generated_at": "2026-10-27T12:19:03.178Z",
+  "commit": "e04c3f3de3cd82a78030ac19d4bdd48f5ac56c41",
   "site": {
     "title": "K-BLACK",
     "base": "https://k-black.top/",
@@ -31,10 +31,10 @@
       ],
       "summary": "发文章太麻烦，是我拆掉 Hugo 的唯一原因。把内容挪进独立仓库、站点改成运行时拉取，最后变成写 md + push 就完事。中间我做错了两版。",
       "url": "/posts/rebuild-without-hugo/",
-      "reading_minutes": 3,
-      "words": 1001,
+      "reading_minutes": 2,
+      "words": 979,
       "cover": null,
-      "hash": "e967e529eb3f59de"
+      "hash": "41a708a34e989b9d"
     },
     {
       "slug": "hyps-hub",
