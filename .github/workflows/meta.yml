@@ -61,9 +61,15 @@ jobs:
           git push origin HEAD:main
       # jsDelivr 边缘缓存：不主动清会滞后（raw 那边约 5 分钟、jsDelivr 更久）。
       # 站点运行时优先读 jsDelivr，所以每次回提 meta.json 后清一次，保证 push 后秒级可见。
-      - name: Purge jsDelivr cache
+      - name: Purge jsDelivr cache (changed files)
         continue-on-error: true
         run: |
-          curl -sS --max-time 30 "https://purge.jsdelivr.net/gh/K-Blaaaack/articles@main/*" || true
-          echo ''
-          echo 'purge requested'
+          # 通配 purge 实测不生效，必须按具体路径清
+          files=$(git diff --name-only HEAD~1 HEAD -- posts pages meta.json 2>/dev/null || true)
+          if [ -z "$files" ]; then echo 'no changed content files'; fi
+          for f in $files; do
+            curl -sS --max-time 20 "https://purge.jsdelivr.net/gh/K-Blaaaack/articles@main/$f" >/dev/null || true
+            echo "purged $f"
+          done
+          curl -sS --max-time 20 "https://purge.jsdelivr.net/gh/K-Blaaaack/articles@main/meta.json" >/dev/null || true
+          echo "purged meta.json"
