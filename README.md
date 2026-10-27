@@ -61,15 +61,33 @@ cover: "cover.webp"          # 可选，相对路径
 ## 5. 写作与发布流程
 
 ```bash
-# 1. 新建文章
-mkdir -p posts/my-slug && $EDITOR posts/my-slug/index.md
+# 1. 新建（自动生成 front matter，date 自动带 +08:00）
+node scripts/new-post.mjs "文章标题" --tags "Linux,Qt" --summary "一句话摘要"
 
-# 2. 本地预览清单（可选）
+# 2. 写正文（图片放同目录，正文用相对路径）
+$EDITOR posts/<slug>/index.md
+
+# 3. 本地预览清单（可选）
 node scripts/gen-meta.mjs && git diff --stat meta.json
 
-# 3. 发布
-git add -A && git commit -m "post(my-slug): 标题" && git push origin main
+# 4. 发布
+git add -A && git commit -m "post(<slug>): 标题" && git push origin main
 ```
+
+`new-post.mjs` 常用参数：
+
+| 参数 | 作用 |
+|---|---|
+| `--slug my-slug` | 指定 slug（默认由标题推导；中文标题推不出时用日期兜底并提示） |
+| `--tags "Linux,Qt"` | 生成 `tags: ["Linux", "Qt"]`（数组，不是单值） |
+| `--summary "…"` | 写入 summary；不传就不生成该字段 |
+| `--date "2026-10-27T12:00:00+08:00"` | 指定发布时间（默认当前时间） |
+| `--draft` | 标记 `draft: true`，不进 meta.json、不上线 |
+| `--page` | 建到 `pages/`（独立页面），而不是 `posts/` |
+| `--cover cover.webp` | 写入 cover 相对路径 |
+| `--force` | 目录已存在时覆盖 `index.md` |
+
+脚本只生成文件，不提交、不推送、不改 `meta.json`——后面三步仍然你自己来。
 
 1. 推到 `main` 即发布：Actions 会重算 `meta.json` 并自动回提（commit 带 `[skip ci]`，不会循环）。
 2. **推送即生效**：站点在运行时拉取本仓库，不需要重新构建、也不需要触发站点部署。列表下一次加载就能看到新文章，正文在打开文章时按需拉取（见 §9）。
