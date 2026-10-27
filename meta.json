@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "generated_at": "2026-10-27T04:46:38.007Z",
-  "commit": "74e53432db779890dee3bfeb64c8ce5e24d408cd",
+  "generated_at": "2026-10-27T04:59:14.879Z",
+  "commit": "68d0618a962b38cef9e7180a22c260bc1a5141de",
   "site": {
     "title": "K-BLACK",
     "base": "https://k-black.top/",
@@ -34,7 +34,7 @@
       "reading_minutes": 2,
       "words": 903,
       "cover": null,
-      "hash": "1c01bda7f9e86279"
+      "hash": "110837d4eb3b6960"
     },
     {
       "slug": "hyps-hub",
